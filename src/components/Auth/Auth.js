@@ -11,7 +11,7 @@ import Input from './Input'
 import useStyles from "./styles"
 import {signin, signup} from "../../actions/auth"
 
-const initialState= { firstName: "", lastName: "" , email: "" , passwor: "", confirmPassword: "",}
+const initialState= { firstName: "", lastName: "" , email: "" , password: "", confirmPassword: "",}
 
 const Auth = () => {
     const classes = useStyles();
@@ -34,6 +34,7 @@ const Auth = () => {
 
     const handleChange = (e) =>{
         setFormData({...formData, [e.target.name]: e.target.value})
+        console.log(e.target)
     }
 
     const handleShowPassword = () =>{
