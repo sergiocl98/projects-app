@@ -7,27 +7,24 @@ import {commentPost} from "../../actions/posts"
 
 const CommentSection = ({post}) => {
     const classes = useStyles();
-    const [comments, setComments] = useState(post?.comments);
     const [comment, setComment] = useState('');
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem("profile"));
     const commentsRef = useRef();
+    const [comments, setComments] = useState(post?.comments);
 
     const handleClick = async () => {
-        const finalComment = `${user.result.name}: ${comment}`
-        const newComments = await dispatch(commentPost(finalComment, post._id));
-
+        const newComments = await dispatch(commentPost(`${user?.result?.name}: ${comment}`, post._id));
         setComments(newComments);
         setComment('');
-
-        commentsRef.current.scrollIntoView({behavior: "smooth"});
+        commentsRef.current.scrollIntoView({behavior: 'smooth'});
     }
 
   return (
     <div className={classes.commentsOuterContainer}>
         <div className={classes.commentsInnerContainer}>
             <Typography gutterBottom variant="h6">Comments</Typography>
-            {comments.map((c,i)=> (
+            {comments?.map((c,i)=> (
                 <Typography key={i} gutterBottom variant="subtitle1">
                    <strong>{c.split(": ")[0]}: </strong>
                    {c.split(": ")[1]}
